@@ -268,6 +268,8 @@ Available emotes
 - :wideget: <img src="https://kissable.bluefast.horse/z9h0ujq.png" width=50>
 - :pon3.stream: <img src="https://kissable.bluefast.horse/jzdokvmj.png" width=50>
 - :nawni.og: <img src="https://pomf2.lain.la/f/z66pfdv8.png" width=50>
+- :toothpaste: <img src="https://raw.githubusercontent.com/eepyamre/emotes_for_tabletop/master/additionalImages/toothpaste.png" width=50>
+- :toothpaste.blush: <img src="https://raw.githubusercontent.com/eepyamre/emotes_for_tabletop/master/additionalImages/toothpaste_blush.png" width=50>
 --- 
 - ![example](example.png)
 ## How to install
