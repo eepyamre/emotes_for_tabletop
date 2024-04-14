@@ -59,30 +59,32 @@ function onFixedUpdate()
 end
 
 function onChat(message, player)
-  if emotes[message] then
-    id = uuid()
-    ids[#ids+1] = {
-      id = id,
-      offsetXDelta = ((math.random(0, offsetXSpeedDelta*2)-offsetXSpeedDelta)/10),
-      offsetXY = "0 0"
-    }
-    grid = UI.getXmlTable('grid')
-    if grid then
-      gridEl = grid[1]
-      children = gridEl['children']
-      children[#children+1] = {
-        tag="Image",
-        attributes={
-          id=id,
-          rectAlignment='LowerLeft',
-          width=emoteWidth,
-          preserveAspect='true',
-          image=message,
-          color="rgba(1,1,1,1)",
-          offsetXY="0 0"
-        },
+  for w in message:gmatch("%S+") do 
+    if emotes[w] then
+      id = uuid()
+      ids[#ids+1] = {
+        id = id,
+        offsetXDelta = ((math.random(0, offsetXSpeedDelta*2)-offsetXSpeedDelta)/10),
+        offsetXY = "0 0"
       }
-      UI.setXmlTable(grid, emotesAssets)
+      grid = UI.getXmlTable('grid')
+      if grid then
+        gridEl = grid[1]
+        children = gridEl['children']
+        children[#children+1] = {
+          tag="Image",
+          attributes={
+            id=id,
+            rectAlignment='LowerLeft',
+            width=emoteWidth,
+            preserveAspect='true',
+            image=w,
+            color="rgba(1,1,1,1)",
+            offsetXY="0 0"
+          },
+        }
+        UI.setXmlTable(grid, emotesAssets)
+      end
     end
   end
 end
