@@ -15,8 +15,8 @@ emotesAssets = {
   }
 }
 fadeSpeed = 0.0025
-offsetSpeed = 0.4
-offsetXSpeedDelta = 5
+offsetSpeed = 0.5
+offsetXSpeedDelta = 4
 emoteWidth = 50
 ids = {}
 function uuid()
@@ -29,31 +29,36 @@ end
 
 function onLoad()
   assets = UI.getCustomAssets()
+  assetsSet = {}
+  for _, asset in pairs(assets) do
+    assetsSet[asset['name']] = true
+  end
   for _, emote in pairs(emotesAssets) do
-    assets[#assets+1] = emote
+    if assetsSet[emote['name']] == nil then 
+      assets[#assets+1] = emote
+    end
   end
   UI.setCustomAssets(assets)
 end
 
 function onFixedUpdate()
   for idx, item in pairs(ids) do
-    color = UI.getAttribute(item['id'], "color")
-    if color then
-      opacity = tonumber(color:match(",(%d?%.?%d*)%)$"))
-      if opacity ~= nil then
-        UI.setAttribute(item['id'], "color", 'rgba(1,1,1,'..opacity - fadeSpeed..')')
-        if math.random() > 0.98 then
-          item['offsetXDelta'] = ((math.random(0, offsetXSpeedDelta*2)-offsetXSpeedDelta)/10)
-        end
-        numbers = {}
-        for num in item['offsetXY']:gmatch("%S+") do
-          table.insert(numbers, tonumber(num))
-        end
-        item['offsetXY'] = numbers[1]+item['offsetXDelta'] .. ' ' .. numbers[2]+offsetSpeed
-        UI.setAttribute(item['id'], "offsetXY", item['offsetXY'])
-      else
-        table.remove(ids, idx)
+    if item['opacity'] > 0.1 then
+      item['opacity'] = item['opacity'] - fadeSpeed
+      UI.setAttribute(item['id'], "color", 'rgba(1,1,1,'..item['opacity']..')')
+      if math.random() > 0.98 then
+        item['offsetXDelta'] = ((math.random(0, offsetXSpeedDelta*2)-offsetXSpeedDelta)/10)
       end
+      numbers = {}
+      for num in item['offsetXY']:gmatch("%S+") do
+        table.insert(numbers, tonumber(num))
+      end
+      item['offsetXY'] = numbers[1]+item['offsetXDelta'] .. ' ' .. numbers[2]+offsetSpeed
+      UI.setAttribute(item['id'], "offsetXY", item['offsetXY'])
+    elseif item['id'] then
+      self.UI.hide(item['id'])
+      UI.hide(item['id'])
+      table.remove(ids, idx)
     end
   end
 end
@@ -65,9 +70,10 @@ function onChat(message, player)
       ids[#ids+1] = {
         id = id,
         offsetXDelta = ((math.random(0, offsetXSpeedDelta*2)-offsetXSpeedDelta)/10),
-        offsetXY = "0 0"
+        offsetXY = "0 0",
+        opacity = 1,
       }
-      grid = UI.getXmlTable('grid')
+      grid = self.UI.getXmlTable('grid')
       if grid then
         gridEl = grid[1]
         children = gridEl['children']
@@ -83,7 +89,10 @@ function onChat(message, player)
             offsetXY="0 0"
           },
         }
-        UI.setXmlTable(grid, emotesAssets)
+        UI.setXmlTable(grid)
+        UI.show("grid")
+        self.UI.setXmlTable(grid)
+        self.UI.hide("grid")
       end
     end
   end
