@@ -266,7 +266,9 @@ emotes = {
  [":kot:"] = true ,
  [":wideget:"] = true ,
  [":pon3.stream:"] = true ,
- [":nawni.og:"] = true 
+ [":nawni.og:"] = true,
+ [":toothpaste:"] = true,
+ [":toothpaste.blush:"] = true,
 }
 
 emotesAssets = {{ name = ":marecon:", url = "https://smart.bluefast.horse/catbox-6t5mq6.png" },
@@ -534,9 +536,10 @@ emotesAssets = {{ name = ":marecon:", url = "https://smart.bluefast.horse/catbox
 { name = ":kot:", url = "https://smart.bluefast.horse/kissable-s480l68.png" },
 { name = ":wideget:", url = "https://kissable.bluefast.horse/z9h0ujq.png" },
 { name = ":pon3.stream:", url = "https://kissable.bluefast.horse/jzdokvmj.png" },
-{ name = ":nawni.og:", url = "https://pomf2.lain.la/f/z66pfdv8.png" }
+{ name = ":nawni.og:", url = "https://pomf2.lain.la/f/z66pfdv8.png" },
+{ name = ":toothpaste:", url = "https://raw.githubusercontent.com/eepyamre/emotes_for_tabletop/master/additionalImages/toothpaste.png" },
+{ name = ":toothpaste.blush:", url = "https://raw.githubusercontent.com/eepyamre/emotes_for_tabletop/master/additionalImages/toothpaste_blush.png" }
 }
-
 fadeSpeed = 0.0025
 offsetSpeed = 0.5
 offsetXSpeedDelta = 4
