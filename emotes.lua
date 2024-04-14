@@ -540,7 +540,7 @@ emotesAssets = {{ name = ":marecon:", url = "https://smart.bluefast.horse/catbox
 fadeSpeed = 0.0025
 offsetSpeed = 0.5
 offsetXSpeedDelta = 4
-emoteWidth = 80
+emoteWidth = 50
 ids = {}
 function uuid()
   local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
