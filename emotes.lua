@@ -540,7 +540,7 @@ emotesAssets = {{ name = ":marecon:", url = "https://smart.bluefast.horse/catbox
 fadeSpeed = 0.0025
 offsetSpeed = 0.5
 offsetXSpeedDelta = 4
-emoteWidth = 50
+emoteWidth = 80
 ids = {}
 function uuid()
   local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
@@ -587,20 +587,20 @@ function onFixedUpdate()
 end
 
 function onChat(message, player)
+  grid = self.UI.getXmlTable('grid')
+  gridEl = grid[1]
+  children = gridEl['children']
   for w in message:gmatch("%S+") do 
     if emotes[w] then
       id = uuid()
       ids[#ids+1] = {
         id = id,
         offsetXDelta = ((math.random(0, offsetXSpeedDelta*2)-offsetXSpeedDelta)/10),
-        offsetXY = "0 0",
+        offsetXY = "10 0",
         opacity = 1,
       }
-      grid = self.UI.getXmlTable('grid')
       if grid then
-        gridEl = grid[1]
-        children = gridEl['children']
-        children[#children+1] = {
+        table.insert(children, {
           tag="Image",
           attributes={
             id=id,
@@ -611,12 +611,14 @@ function onChat(message, player)
             color="rgba(1,1,1,1)",
             offsetXY="0 0"
           },
-        }
-        UI.setXmlTable(grid)
-        UI.show("grid")
-        self.UI.setXmlTable(grid)
-        self.UI.hide("grid")
+        })
       end
     end
+  end
+  if #children ~= 0 then 
+    UI.setXmlTable(grid)
+    UI.show("grid")
+    self.UI.setXmlTable(grid)
+    self.UI.hide("grid")
   end
 end
